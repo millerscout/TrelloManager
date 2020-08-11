@@ -1,0 +1,288 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+
+        xmlns:local="clr-namespace:TrelloManager"
+        xmlns:Models="clr-namespace:Core.Models;assembly=Core"
+        x:Class="TrelloManager.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="800">
+    <Grid x:Name="MainGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Margin="5,0,5,5" ShowGridLines="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--Main-Row: 0-->
+        <TextBox Grid.Row="0" Grid.Column="0"  x:Name="txtPath" HorizontalAlignment="Stretch" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" IsReadOnly="True"/>
+        <Button  Grid.Row="0" Grid.Column="1"  x:Name="BtnChangePath" Content="Change Path" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Stretch" Width="75" Click="BtnChangePath_Click"/>
+        <Button  Grid.Row="0"  Grid.Column="2" x:Name="BtnClear" Content="Run" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Stretch" Width="75" Click="BtnClear_Click"/>
+        <Button  Grid.Row="0"  Grid.Column="3" x:Name="BtnConfig" Content="Config" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Stretch" Width="75" Click="BtnConfig_Click"/>
+
+        <!--Main-Row: 1-->
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5"  x:Name="GridLists" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!--Grid-Row: 0-->
+            <TextBlock Grid.Row="0" Grid.Column="0"   Text="Boards"  Margin="5,5,5,0" Width="auto" HorizontalAlignment="Left" />
+
+            <TextBlock Grid.Row="0" Grid.Column="1"   Text="Lists"  Margin="5,5,5,0" Width="auto" HorizontalAlignment="Left" />
+            
+            <TextBlock Grid.Row="0" Grid.Column="2"   Text="Labels"  Margin="5,5,5,0" Width="auto" HorizontalAlignment="Left" />
+
+            
+
+            <!--Grid-Row: 1-->
+            <Button  Grid.Row="1"  Grid.Column="0" x:Name="BtnLoadBoard" Content="Refresh Boards" HorizontalAlignment="left" Margin="5,5,0,5" VerticalAlignment="Stretch" Width="75" Click="BtnLoadBoard_Click"/>
+            <Button  Grid.Row="1"  Grid.Column="1" x:Name="BtnLoadList" Content="Refresh Lists" HorizontalAlignment="left" Margin="5,5,0,5" VerticalAlignment="Stretch" Width="75" Click="BtnLoadLists_Click"/>
+            <Button  Grid.Row="1"  Grid.Column="2" x:Name="BtnLoadLabel" Content="Refresh Labels" HorizontalAlignment="left" Margin="5,5,0,5" VerticalAlignment="Stretch" Width="75" Click="BtnLoadLabels_Click"/>
+            
+
+            <!--Grid-Row: 2-->
+            <TextBox Grid.Row="2" Grid.Column="0"  x:Name="txtSearchBoard" TextWrapping="Wrap" TextChanged="TxtSearchBoard_TextChanged" UndoLimit="20" KeyDown="TxtSearchBoard_KeyDown" Width="Auto" Padding="2" Margin="5,0,5,0">
+                <TextBox.Style>
+                    <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                        <Style.Resources>
+                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <Label Content="Search" Foreground="Black"/>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Background" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+
+            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="txtSearchList" TextWrapping="Wrap" TextChanged="TxtSearchList_TextChanged" UndoLimit="20" KeyDown="TxtSearchList_KeyDown" Width="Auto" Padding="2" Margin="5,0,5,0">
+                <TextBox.Style>
+                    <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                        <Style.Resources>
+                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <Label Content="Search" Foreground="Black"/>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Background" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            
+            <TextBox Grid.Row="2" Grid.Column="2"  x:Name="txtSearchLabel" TextWrapping="Wrap" TextChanged="TxtSearchLabel_TextChanged" UndoLimit="20" KeyDown="TxtSearchLabel_KeyDown" Width="Auto" Padding="2" Margin="5,0,5,0">
+                <TextBox.Style>
+                    <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                        <Style.Resources>
+                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <Label Content="Search" Foreground="Black"/>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Background" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+
+            <Button  Grid.Row="2"  Grid.Column="3" x:Name="BtnLoadCards" Content="LoadCards" HorizontalAlignment="left" Margin="5,5,0,5" VerticalAlignment="Stretch" Width="75" Click="BtnLoadCards_Click"/>
+            
+            <!--Grid-Row: 3-->
+            <ListView  x:Name="ListViewBoard"
+                  Grid.Row="3"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="1"
+                  VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch"
+                  SelectionMode="Extended"
+                  BorderThickness="1" Margin="5,5,5,5" 
+                  HorizontalContentAlignment="Stretch">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Background" Value="{Binding ViewColor}"></Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy Label Id" CommandParameter="{Binding}"  Click="CopyLabelId" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid  HorizontalAlignment="Stretch">
+                                        <RadioButton  IsChecked="{Binding Active}" Checked="ChangeBoard" />
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <GridViewColumnHeader Tag="Active" Click="SortHeaderClick"/>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="Auto">
+                            <GridViewColumnHeader Tag="DisplayName" Click="SortHeaderClick" Content="Name"/>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                <Models:TrelloBoard Name="Board Sample"/>
+            </ListView>
+            <ListView  x:Name="ListViewLists"
+                  Grid.Row="3"
+                  Grid.Column="1"
+                  Grid.ColumnSpan="1"
+                  VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch"
+                  SelectionMode="Extended"
+                  BorderThickness="1" Margin="5,5,5,5" 
+                  HorizontalContentAlignment="Stretch">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Background" Value="{Binding ViewColor}"></Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy Id" CommandParameter="{Binding}"  Click="CopyId" />
+                        <MenuItem Header="De-Select All" CommandParameter="{Binding}"  Click="CopyId" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid  HorizontalAlignment="Stretch">
+                                        <CheckBox  IsChecked="{Binding Active}" Checked="UpdateCheckBoxList" Unchecked="UpdateCheckBoxList" />
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <GridViewColumnHeader Tag="Active" Click="SortHeaderClick"/>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="Auto">
+                            <GridViewColumnHeader Tag="DisplayName" Click="SortHeaderClick" Content="Name"/>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding QtdCards}" Width="Auto">
+                            <GridViewColumnHeader Tag="DisplayName" Click="SortHeaderClick" Content="Qtd. de Cards"/>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                <Models:TrelloBoard Name="List Sample"/>
+            </ListView>
+            <ListView  x:Name="ListViewLabel"
+                  Grid.Row="3"
+                  Grid.Column="2"
+                  Grid.ColumnSpan="1"
+                  VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch"
+                  SelectionMode="Extended"
+                  BorderThickness="1" Margin="5,5,5,5" 
+                  HorizontalContentAlignment="Stretch">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Background" Value="{Binding ViewColor}"></Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy Label Id" CommandParameter="{Binding}"  Click="CopyLabelId" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid  HorizontalAlignment="Stretch">
+                                        <CheckBox  IsChecked="{Binding Active}" Checked="UpdateCheckBox" Unchecked="UpdateCheckBox" />
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <GridViewColumnHeader Tag="Active" Click="SortHeaderClick"/>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="Auto">
+                            <GridViewColumnHeader Tag="DisplayName" Click="SortHeaderClick" Content="Name"/>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Color}" Width="Auto">
+                            <GridViewColumnHeader Tag="DisplayName" Click="SortHeaderClick" Content="Color"/>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                <Models:TrelloBoard Name="Label Sample"/>
+            </ListView>
+            
+
+
+            <ScrollViewer Grid.Row="3"
+                  Grid.Column="3"
+                  Grid.ColumnSpan="2">
+                <RichTextBox IsDocumentEnabled="True" x:Name="RtbDetail" IsReadOnly="false"  AcceptsReturn="True" AcceptsTab="True">
+                    <RichTextBox.Resources>
+                        <Style TargetType="{x:Type Paragraph}">
+                            <Setter Property="Margin" Value="0" />
+                        </Style>
+                    </RichTextBox.Resources>
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla elit, ultrices at nulla sed, bibendum facilisis odio. Integer et velit et enim finibus efficitur. Nullam fermentum ornare elementum. Vivamus non ipsum libero. Nunc ultrices hendrerit ipsum, et molestie nisi bibendum eu. Nam aliquet vel lorem ac venenatis. Nullam sed nunc porta, mollis nulla in, sollicitudin ligula."/>
+                        </Paragraph>
+                        <Paragraph Foreground="Blue">
+                            <Bold>
+                                <Run Text="Aenean non mauris placerat, dignissim nisi dictum, semper lorem. Vestibulum venenatis ullamcorper mattis. Donec pretium imperdiet porttitor. Suspendisse eu ex at orci iaculis luctus. Cras pellentesque lacus ac ipsum ultricies consequat. Vestibulum et iaculis tellus. Phasellus elit massa, feugiat at placerat vitae, placerat nec justo. Phasellus eu augue varius, porta purus ac, venenatis leo. Proin turpis nisl, pellentesque eget fringilla quis, aliquam ultrices nisi. Praesent eros lectus, interdum ut interdum ac, gravida vel libero. Donec magna elit, ullamcorper eu purus vel, commodo suscipit dui. Sed sed eleifend enim. Vestibulum feugiat dignissim ante, vel venenatis turpis. Etiam mauris mauris, dignissim ut eleifend vitae, bibendum id mauris. Suspendisse at orci gravida nunc suscipit rutrum vel eget lorem. Phasellus quis dignissim ipsum. Nulla interdum lobortis posuere. Duis consequat neque nec magna dictum, vitae consectetur magna blandit. Nunc euismod molestie tellus, quis interdum dolor lobortis et. Nullam interdum sed quam vitae fermentum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis in odio justo. Sed in nisl consequat, viverra metus sed, tincidunt libero."/>
+                            </Bold>
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+            </ScrollViewer>
+
+        </Grid>
+    </Grid>
+</Window>
