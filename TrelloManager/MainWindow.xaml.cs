@@ -18,8 +18,9 @@ using System.Windows.Shapes;
 using Core;
 using Core.Models;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using TrelloManager;
 
-namespace TrelloManager
+namespace TrelloManagerv2
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

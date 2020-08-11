@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Core;
 
-namespace TrelloManager
+namespace TrelloManagerv2
 {
     /// <summary>
     /// Interaction logic for App.xaml
