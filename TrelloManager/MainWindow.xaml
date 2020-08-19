@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrelloManagerv2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="800">
+        Title="MainWindow" Height="800" Width="1440" Icon="/icon.png">
     <Grid x:Name="MainGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Margin="5,0,5,5" ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
@@ -51,7 +51,17 @@
 
             <!--Grid-Row: 1-->
             <Button  Grid.Row="1"  Grid.Column="0" x:Name="BtnLoadBoard" Content="Refresh Boards" HorizontalAlignment="left" Margin="5,5,0,5" VerticalAlignment="Stretch" Width="75" Click="BtnLoadBoard_Click"/>
-            <Button  Grid.Row="1"  Grid.Column="1" x:Name="BtnLoadList" Content="Refresh Lists" HorizontalAlignment="left" Margin="5,5,0,5" VerticalAlignment="Stretch" Width="75" Click="BtnLoadLists_Click"/>
+
+            <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button  Grid.Row="1"  Grid.Column="0" x:Name="BtnLoadList" Content="Refresh Lists" HorizontalAlignment="left" Margin="5,5,0,5" VerticalAlignment="Stretch" Width="75" Click="BtnLoadLists_Click"/>
+                <Button  Grid.Row="1"  Grid.Column="1" x:Name="BtnReloadCards" Content="Reload Cards" HorizontalAlignment="left" Margin="5,5,0,5" VerticalAlignment="Stretch" Width="75" Click="BtnReloadCards_Click"/>
+            </Grid>
+
+
             <Button  Grid.Row="1"  Grid.Column="2" x:Name="BtnLoadLabel" Content="Refresh Labels" HorizontalAlignment="left" Margin="5,5,0,5" VerticalAlignment="Stretch" Width="75" Click="BtnLoadLabels_Click"/>
 
 
@@ -131,8 +141,24 @@
                 </TextBox.Style>
             </TextBox>
 
-            <Button  Grid.Row="2"  Grid.Column="3" x:Name="BtnLoadCards" Content="LoadCards" HorizontalAlignment="left" Margin="5,5,0,5" VerticalAlignment="Stretch" Width="75" Click="BtnLoadCards_Click"/>
+            <Grid Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Button  Grid.Row="0"  Grid.Column="0" x:Name="BtnLoadCards" Content="LoadCards" HorizontalAlignment="left" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="75" Click="BtnLoadCards_Click"/>
+                <Button  Grid.Row="0"  Grid.Column="1" x:Name="BtnCardToCSV" Content="Load As CSV" HorizontalAlignment="left" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="75" Click="BtnCardToCsv_Click"/>
+                <Button  Grid.Row="0"  Grid.Column="2" x:Name="BtnRunSkip" Content="Clear Text" HorizontalAlignment="left" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="75" Click="BtnRunSkip_Click"/>
+                <Button  Grid.Row="0"  Grid.Column="3" x:Name="BtnGetAttachments" Content="GetAttachment" HorizontalAlignment="left" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="75" Click="BtnGetAttachments_Click"/>
+                <Button  Grid.Row="0"  Grid.Column="4" x:Name="BtnCleanFiles" Content="CleanFile" HorizontalAlignment="left" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="75" Click="BtnCleanFiles_Click"/>
 
+
+            </Grid>
             <!--Grid-Row: 3-->
             <ListView  x:Name="ListViewBoard"
                   Grid.Row="3"
@@ -201,13 +227,13 @@
                                     </Grid>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
-                            <GridViewColumnHeader Tag="Active" Click="SortHeaderClick"/>
+                            <GridViewColumnHeader Tag="Active" Click="SortHeaderList_Click"/>
                         </GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="Auto">
-                            <GridViewColumnHeader Tag="DisplayName" Click="SortHeaderClick" Content="Name"/>
+                            <GridViewColumnHeader Tag="Name" Click="SortHeaderList_Click" Content="Name"/>
                         </GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding QtdCards}" Width="Auto">
-                            <GridViewColumnHeader Tag="DisplayName" Click="SortHeaderClick" Content="Qtd. de Cards"/>
+                            <GridViewColumnHeader Tag="QtdCards" Click="SortHeaderList_Click" Content="Qtd. de Cards"/>
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>
@@ -258,7 +284,7 @@
             <ScrollViewer Grid.Row="3"
                   Grid.Column="3"
                   Grid.ColumnSpan="2">
-                <RichTextBox IsDocumentEnabled="True" x:Name="RtbDetail" IsReadOnly="false"  AcceptsReturn="True" AcceptsTab="True">
+                <RichTextBox IsDocumentEnabled="True" x:Name="RtbDetail" IsReadOnly="false"  AcceptsReturn="True" AcceptsTab="True" Margin="0,5,0,0">
                     <RichTextBox.Resources>
                         <Style TargetType="{x:Type Paragraph}">
                             <Setter Property="Margin" Value="0" />
