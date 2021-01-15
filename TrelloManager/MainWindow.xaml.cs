@@ -68,10 +68,10 @@ namespace TrelloManagerv2
             ListViewLabel.Items.Clear();
             ListViewLists.Items.Clear();
 
-            listOfBoards = new ObservableCollection<TrelloBoard>(CachingService.Load<IEnumerable<TrelloBoard>>(CachingType.Board));
-            listOflists = new ObservableCollection<TrelloList>(CachingService.Load<IEnumerable<TrelloList>>(CachingType.List));
-            listOfCards = CachingService.Load<Dictionary<string, List<TrelloCard>>>(CachingType.Card);
-            currentBoard = CachingService.Load<string>(CachingType.CurrentBoard);
+            //listOfBoards = new ObservableCollection<TrelloBoard>(CachingService.Load<IEnumerable<TrelloBoard>>(CachingType.Board));
+            //listOflists = new ObservableCollection<TrelloList>(CachingService.Load<IEnumerable<TrelloList>>(CachingType.List));
+            //listOfCards = CachingService.Load<Dictionary<string, List<TrelloCard>>>(CachingType.Card);
+            //currentBoard = CachingService.Load<string>(CachingType.CurrentBoard);
 
             if (LoadService.Config.Key.Length > 0 && LoadService.Config.Token.Length > 0)
                 BtnLoadBoard_Click(this, null);
@@ -94,7 +94,6 @@ namespace TrelloManagerv2
 
             //if (SearchList.Length > 0)
             //    ListView.ScrollIntoView(SearchList[currentIndexSearchBoard]);
-
             //ListView_SelectionChanged(this, null);
         }
         public void RefreshListOfLists()
@@ -202,7 +201,7 @@ namespace TrelloManagerv2
         {
             var boards = Service.LoadBoards();
 
-            CachingService.Save(boards, $"{ CachingType.Board}"));
+            //CachingService.Save(boards, $"{ CachingType.Board}"));
             listOfBoards = new ObservableCollection<TrelloBoard>(boards);
 
             UpdateListViewBoard();

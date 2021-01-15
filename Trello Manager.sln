@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29827.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrelloManager", "TrelloManager\TrelloManager.csproj", "{F964FF73-C52B-464B-A5CD-7FB790A9B80A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrelloManagerCore", "TrelloManagerCore\TrelloManagerCore.csproj", "{AACAE17D-B8EE-41D0-8966-5F33E9BF6087}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrelloManagerCore", "TrelloManagerCore\TrelloManagerCore.csproj", "{AACAE17D-B8EE-41D0-8966-5F33E9BF6087}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indexer", "Indexer\Indexer.csproj", "{6FDB60CF-62B6-4A7A-8BA0-EE83B605AAB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{AACAE17D-B8EE-41D0-8966-5F33E9BF6087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AACAE17D-B8EE-41D0-8966-5F33E9BF6087}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AACAE17D-B8EE-41D0-8966-5F33E9BF6087}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FDB60CF-62B6-4A7A-8BA0-EE83B605AAB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FDB60CF-62B6-4A7A-8BA0-EE83B605AAB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FDB60CF-62B6-4A7A-8BA0-EE83B605AAB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FDB60CF-62B6-4A7A-8BA0-EE83B605AAB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

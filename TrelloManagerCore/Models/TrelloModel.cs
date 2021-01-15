@@ -135,7 +135,7 @@ public partial class TrelloCard : BaseTrello
 {
     public object CheckItemStates { get; set; }
     public bool Closed { get; set; }
-    public DateTimeOffset DateLastActivity { get; set; }
+    public DateTime DateLastActivity { get; set; }
     public string Desc { get; set; }
     public DescData DescData { get; set; }
     public long? DueReminder { get; set; }
